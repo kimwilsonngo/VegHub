@@ -19,13 +19,20 @@ export default class MyApp extends React.Component {
    }
 }
 
-const HomeNavigator = createStackNavigator({
-   Home: HomeScreen,
-    Category: CategoryScreen,
-     Product: ProductScreen
-}, {
-    //configuration options...
-});
+const HomeNavigator = createStackNavigator(
+    {
+        Home: HomeScreen,
+        Category: CategoryScreen,
+        Product: ProductScreen,
+        Plants: PlantsScreen,
+        PlantsResult: PlantsResultsScreen,
+        Bag: BagScreen,
+        Camera: CameraScreen
+    },
+    {
+        initialRouteName: "Plants"
+    }
+);
 
 //USE THIS FOR THE GALLERY OF PLANTS
 const PlantsNavigator = createStackNavigator({
