@@ -11,14 +11,18 @@ import { FlatGrid } from 'react-native-super-grid';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import { PlantsResultsTest } from './PlantsResultsTest';
+import { App } from './Weather';
+
+
 const DeviceWidth = Dimensions.get('window').width
 const scaleVal = 0.4
 
 export class BagScreen extends Component {
   render() {
       return (
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>Hello world BAG SCREEN </Text>
+        <View>
+        <Weather/ >
         </View>
       );
     }
@@ -26,6 +30,9 @@ export class BagScreen extends Component {
 
 
 export class HomeScreen extends Component {
+    static navigationOptions = {
+        title: 'Home',
+        };
   render() {
     return (
       <View style={{
@@ -76,7 +83,6 @@ export class ProductScreen extends Component {
 
 export class PlantsResultsScreen extends Component {
     render() {
-        /* 2. Get the param, provide a fallback value if not available */
         const { navigation } = this.props;
         const data = navigation.getParam('data', 'NO-ID');
 
@@ -133,9 +139,6 @@ export class PlantsScreen extends Component {
             />
         );
     }
-
-
-
 }
 
 export class CameraScreen extends Component {

@@ -1,90 +1,114 @@
-import React from 'react';
-import { createBottomTabNavigator, 
-         createStackNavigator,
-          createAppContainer} from 'react-navigation';
-import { HomeScreen,
-         CategoryScreen, 
-         ProductScreen,  
-         PlantsScreen,
+import React, {Component} from 'react';
+import {
+    AppRegistry,
+    View
+} from 'react-native';
+import { createBottomTabNavigator,
+                      createStackNavigator,
+                       createAppContainer} from 'react-navigation';
+             import { HomeScreen,
+                      PlantsScreen,
          PlantsResultsScreen,
          BagScreen,
          CameraScreen } from './src/MyScreens';
 
+import {PlantsResultsTest} from './src/PlantsResultsTest';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-
-export default class MyApp extends React.Component {
-   render() {
-      return(<App />);
-   }
-}
 
 const HomeNavigator = createStackNavigator(
     {
         Home: HomeScreen,
-        Category: CategoryScreen,
-        Product: ProductScreen,
-        Plants: PlantsScreen,
-        PlantsResult: PlantsResultsScreen,
-        Bag: BagScreen,
-        Camera: CameraScreen
     },
     {
-        initialRouteName: "Plants"
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#f4511e',
+            },
+        }
     }
 );
 
-//USE THIS FOR THE GALLERY OF PLANTS
-const PlantsNavigator = createStackNavigator({
-      PlantsHome: PlantsScreen,
-   PlantsResults: PlantsResultsScreen
-}, {
-    //configuration options...
-});
+const PlantStack = createStackNavigator({
+        Plants: PlantsScreen,
+    },
+    {
+    }
+);
 
-const AppTabNavigator = createBottomTabNavigator({
-   Home: HomeNavigator,
-      Plants: PlantsNavigator,
-      Camera: CameraScreen,
-         Bag: BagScreen
-   },{
-   
-     navigationOptions: ({ navigation }) => ({
-        //define the icon for each tab here...
-       tabBarIcon: ({ focused, tintColor }) => {
-      const { routeName } = navigation.state;
-      
-      let icon;
-      switch(routeName) {
-         case 'Home':
-            icon = `ios-search${focused ? '' : '-outline'}`;
-            break;
-         case 'Plants':
-            icon = `ios-search${focused ? '' : '-outline'}`;
-            break;
-         case 'Bag':
-            icon = `ios-appstore${focused ? '' : '-outline'}`;
-            break;
-         case 'Camera':
-            break;
+const CameraStack = createStackNavigator({
+        Camera: CameraScreen
+        },
+        {
         }
-        
-        return <Ionicons
-                 name={icon} 
-                 size={25} 
-                 color={tintColor} />;
-       },
-     }),
-     tabBarOptions: {
-       initialRouteName: 'Home',
-       activeTintColor: '#fff',
-       inactiveTintColor: '#ddd',
-       style: {
-         backgroundColor: '#4d535e',
-      }
-   }
+);
+
+const ProfileStack = createStackNavigator({
+        Profile: BagScreen
+        },
+        {
+        }
+);
+
+const BottomTabNavigator = createBottomTabNavigator({
+    Home: HomeNavigator,
+    Plants: PlantStack,
+    Camera: CameraStack,
+    Profile: ProfileStack
+
+    },{
+        navigationOptions: ({ navigation }) => ({
+
+        //define the icon for each tab here...
+        tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+    },
+    }),
+        tabBarOptions: {
+            initialRouteName: 'Plants',
+            style: {
+                backgroundColor: 'blue',
+            }
+    }
 });
 
+const AppStack = createStackNavigator({
+    Main: BottomTabNavigator
+    },
+    {
+        headerMode: 'none', //removes the dumb first header
+        navigationOptions:  ({ navigation }) => {
+
+                let headerOption = {};
+                if (navigation.state.routeName === 'Home') {
+                    headerOption.header = null;
+                }
+                return {
+                    headerVisible: false, //removes the dumb first header
+                }
+            }
+    })
+
+export default class Main extends Component {
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      route: {
+        name: 'Home',
+        passProps:{
+          notification: props.notification
+        }
+      }
+    };
+  }
+  render() {
+    return (
+        <App/>
+    );
+  }
+}
+AppRegistry.registerComponent('ineguapp', () => Main);
 //NECESSARY FOR REACT NATIVE 3
-const App = createAppContainer(AppTabNavigator);
+const App = createAppContainer(AppStack);
 
