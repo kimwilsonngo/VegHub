@@ -4,7 +4,7 @@ import {  StyleSheet, View, Text, FlatList, Dimensions } from 'react-native';
 
 import {Alert, AppRegistry, Platform, TouchableOpacity} from 'react-native';
 
-export class PlantsResultsTest extends Component {
+export class PlantsResultsScreen extends Component {
     render() {
         const { navigation } = this.props;
         const data = navigation.getParam('data', 'NO-ID');

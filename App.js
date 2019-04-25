@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
-import {
-    AppRegistry,
-    View
-} from 'react-native';
-import { createBottomTabNavigator,
-                      createStackNavigator,
-                       createAppContainer} from 'react-navigation';
-             import { HomeScreen,
-                      PlantsScreen,
-         PlantsResultsScreen,
-         BagScreen,
-         CameraScreen } from './src/MyScreens';
 
-import {PlantsResultsTest} from './src/PlantsResultsTest';
+import {
+AppRegistry,
+View }
+from 'react-native';
+
+import {
+createBottomTabNavigator,
+createStackNavigator,
+createAppContainer, } from 'react-navigation';
+
+import {
+HomeScreen,
+PlantsScreen,
+BagScreen,
+CameraScreen, } from './src/MyScreens';
+
+import {PlantsResultsScreen} from './src/PlantsResultsScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -31,6 +35,7 @@ const HomeNavigator = createStackNavigator(
 
 const PlantStack = createStackNavigator({
         Plants: PlantsScreen,
+        PlantsResults: PlantsResultsScreen,
     },
     {
     }
@@ -53,7 +58,7 @@ const ProfileStack = createStackNavigator({
 const BottomTabNavigator = createBottomTabNavigator({
     Home: HomeNavigator,
     Plants: PlantStack,
-    Camera: CameraStack,
+   // Camera: CameraStack,
     Profile: ProfileStack
 
     },{

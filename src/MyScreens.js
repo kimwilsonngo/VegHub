@@ -11,9 +11,8 @@ import { FlatGrid } from 'react-native-super-grid';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { PlantsResultsTest } from './PlantsResultsTest';
+import { PlantsResultsScreen } from './PlantsResultsScreen';
 import { App } from './Weather';
-
 
 const DeviceWidth = Dimensions.get('window').width
 const scaleVal = 0.4
@@ -30,6 +29,11 @@ export class BagScreen extends Component {
 
 
 export class HomeScreen extends Component {
+
+    handleClick = (data) => {
+            this.props.navigation.navigate('Camera');
+        }
+
     static navigationOptions = {
         title: 'Home',
         };
@@ -45,10 +49,12 @@ export class HomeScreen extends Component {
             flexDirection: 'row',
             backgroundColor: "grey"}}>
             <View>
-              <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, backgroundColor: 'powderblue'}}>
-                <Text> CAMTONO BEAN </Text>
-                <Icon name = "rocket" size = {DeviceWidth*scaleVal} color="#900" />
-              </View>
+                <TouchableOpacity onPress={() => this.handleClick("rocket")}>
+                    <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, backgroundColor: 'powderblue'}}>
+                        <Text> CAMTONO BEAN </Text>
+                        <Icon name = "rocket" size = {DeviceWidth*scaleVal} color="#900" />
+                    </View>
+                </TouchableOpacity>
               <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, backgroundColor: 'skyblue'}} />
             </View>
             <View>
@@ -81,25 +87,12 @@ export class ProductScreen extends Component {
   }
 }
 
-export class PlantsResultsScreen extends Component {
-    render() {
-        const { navigation } = this.props;
-        const data = navigation.getParam('data', 'NO-ID');
-
-        return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Your Plant is: {JSON.stringify(data)}</Text>
-
-            </View>
-        );
-    }
-}
-
 export class PlantsScreen extends Component {
 
     //When uses presses a plant, navigates them to each plant's result screen
     handleClick = (data) => {
-        this.props.navigation.navigate('PlantsResult', {data});
+        this.props.navigation.navigate('PlantsResults', {data});
+        //this.props.navigation.navigate('Home');
     }
 
     render() {
