@@ -8,26 +8,30 @@ from 'react-native';
 import {
 createBottomTabNavigator,
 createStackNavigator,
-createAppContainer, } from 'react-navigation';
+createAppContainer,
+createDrawerNavigator, } from 'react-navigation';
 
 import {
 HomeScreen,
 PlantsScreen,
 BagScreen,
-CameraScreen, } from './src/MyScreens';
+} from './src/MyScreens';
+import {CameraScreen} from './src/CameraScreen';
+import {WeatherScreen} from './src/Weather';
 
 import {PlantsResultsScreen} from './src/PlantsResultsScreen';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const HomeNavigator = createStackNavigator(
+const HomeStack = createStackNavigator(
     {
         Home: HomeScreen,
+        Camera: CameraScreen
     },
     {
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: '#f4511e',
+                backgroundColor: 'black',
             },
         }
     }
@@ -36,27 +40,31 @@ const HomeNavigator = createStackNavigator(
 const PlantStack = createStackNavigator({
         Plants: PlantsScreen,
         PlantsResults: PlantsResultsScreen,
+
     },
     {
     }
 );
 
-const CameraStack = createStackNavigator({
-        Camera: CameraScreen
-        },
-        {
-        }
+const ProfileStack = createStackNavigator({
+        Profile: WeatherScreen
+    },
+    {
+    }
 );
 
-const ProfileStack = createStackNavigator({
-        Profile: BagScreen
-        },
-        {
-        }
+
+const DrawerNavigator = createDrawerNavigator({
+    Home: HomeStack,
+    Notifications: PlantStack,
+    },
+    {
+        drawerWidth: 300
+    }
 );
 
 const BottomTabNavigator = createBottomTabNavigator({
-    Home: HomeNavigator,
+    Home: HomeStack,
     Plants: PlantStack,
    // Camera: CameraStack,
     Profile: ProfileStack
@@ -72,13 +80,15 @@ const BottomTabNavigator = createBottomTabNavigator({
         tabBarOptions: {
             initialRouteName: 'Plants',
             style: {
-                backgroundColor: 'blue',
+                backgroundColor: 'black',
+                color: 'white',
             }
     }
 });
 
 const AppStack = createStackNavigator({
-    Main: BottomTabNavigator
+    Main: BottomTabNavigator,
+    Drawer: DrawerNavigator,
     },
     {
         headerMode: 'none', //removes the dumb first header

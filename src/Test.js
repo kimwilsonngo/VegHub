@@ -20,7 +20,7 @@ const wbOrder = {
   incandescent: 'auto',
 };
 
-export class CameraScreen extends Component {
+export class TestScreen extends Component {
   state = {
     flash: 'off',
     zoom: 0,

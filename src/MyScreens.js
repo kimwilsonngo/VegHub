@@ -6,83 +6,58 @@ import {  StyleSheet, View, Text, FlatList, Dimensions } from 'react-native';
 //import { API_KEY } from './utils/WeatherAPIKey';
 
 import {Alert, AppRegistry, Platform, TouchableOpacity} from 'react-native';
-
 import { FlatGrid } from 'react-native-super-grid';
-
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import { PlantsResultsScreen } from './PlantsResultsScreen';
-import { App } from './Weather';
-
 const DeviceWidth = Dimensions.get('window').width
 const scaleVal = 0.4
-
-export class BagScreen extends Component {
-  render() {
-      return (
-        <View>
-        <Weather/ >
-        </View>
-      );
-    }
-}
-
 
 export class HomeScreen extends Component {
 
     handleClick = (data) => {
-            this.props.navigation.navigate('Camera');
-        }
+        this.props.navigation.navigate(data);
+    }
 
     static navigationOptions = {
-        title: 'Home',
-        };
+        headerStyle:{
+            backgroundColor: 'transparent',
+            zIndex: 100,
+        },
+    };
+
   render() {
     return (
       <View style={{
           flex: 1,
           justifyContent: 'flex-end',
           alignItems: 'center',
-          marginBottom: 36
+          marginBottom: 15
         }}>
-          <View style={{
-            flexDirection: 'row',
-            backgroundColor: "grey"}}>
+        <View style={{
+        flexDirection: 'row',
+        backgroundColor: "white"}}>
             <View>
-                <TouchableOpacity onPress={() => this.handleClick("rocket")}>
+                <TouchableOpacity onPress={() => this.handleClick('Camera')}>
                     <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, backgroundColor: 'powderblue'}}>
-                        <Text> CAMTONO BEAN </Text>
-                        <Icon name = "rocket" size = {DeviceWidth*scaleVal} color="#900" />
+                    <Text> CAMTONO BEAN </Text>
+                    <Icon name = "rocket" size = {DeviceWidth*scaleVal} color="#900" />
                     </View>
                 </TouchableOpacity>
-              <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, backgroundColor: 'skyblue'}} />
+                <TouchableOpacity onPress={() => this.handleClick("Plants")}>
+                    <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, backgroundColor: 'skyblue'}}>
+                    </View>
+                </TouchableOpacity>
             </View>
             <View>
-              <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, marginLeft:1, backgroundColor: 'powderblue'}} />
-              <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, marginLeft:1, backgroundColor: 'skyblue'}} />
+                <TouchableOpacity onPress={() => this.handleClick('Camera')}>
+                    <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, marginLeft:1, backgroundColor: 'powderblue'}} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.handleClick('Camera')}>
+                    <View style={{width: DeviceWidth*scaleVal, height: DeviceWidth*scaleVal, marginBottom:1, marginLeft:1, backgroundColor: 'skyblue'}} />
+                </TouchableOpacity>
             </View>
-          </View>
         </View>
-    );
-  }
-}
-
-export class CategoryScreen extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello world CATEGORY SCREEN</Text>
-      </View>
-    );
-  }
-}
-
-export class ProductScreen extends Component {
-  render() {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello world PRODUCT</Text>
-      </View>
+    </View>
     );
   }
 }
@@ -132,16 +107,6 @@ export class PlantsScreen extends Component {
             />
         );
     }
-}
-
-export class CameraScreen extends Component {
-    render() {
-        return (
-          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Text>Hello world CAMERA</Text>
-          </View>
-        );
-      }
 }
 
 
